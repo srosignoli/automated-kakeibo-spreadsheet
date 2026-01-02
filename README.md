@@ -4,6 +4,8 @@ Automated Google Apps Script that transforms a blank Google Sheet into a fully f
 
 This system handles date generation, layout formatting, visual grouping, and automatic weekly/yearly analysis allowing you to focus on your spending habits, not spreadsheet formulas.
 
+<a href="https://www.buymeacoffee.com/srosignoli" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+
 ## ✨ Features
 
 * **Fixed Block Layout:** Generates a paper-like feel with 5 rows per day (expandable).
@@ -89,3 +91,9 @@ Once the script is installed and you refresh your Google Sheet, a custom menu ti
     * **Do not rename existing items** in `CONFIG` if you want to keep their data.
     * *Example:* If you rename "Netflix" to "Streaming", the script will not know they are the same thing, and the value associated with "Netflix" will be dropped.
     * **Best Practice:** Add new items to the end of the lists in `CONFIG`.
+
+## ☕ Support the Project
+
+If this script saved you time or helped you organize your finances, consider buying me a coffee! It keeps the motivation high to add new features.
+
+[Buy me a coffee](https://www.buymeacoffee.com/srosignoli)
