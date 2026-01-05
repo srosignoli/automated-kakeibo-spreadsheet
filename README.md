@@ -4,6 +4,8 @@ Automated Google Apps Script that transforms a blank Google Sheet into a fully f
 
 This system handles date generation, layout formatting, visual grouping, and automatic weekly/yearly analysis allowing you to focus on your spending habits, not spreadsheet formulas.
 
+![Kakeibo Dashboard Screenshot](assets/kakeibo-1.png)
+
 <a href="https://www.buymeacoffee.com/srosignoli" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
 
 ## ✨ Features
@@ -91,6 +93,39 @@ Once the script is installed and you refresh your Google Sheet, a custom menu ti
     * **Do not rename existing items** in `CONFIG` if you want to keep their data.
     * *Example:* If you rename "Netflix" to "Streaming", the script will not know they are the same thing, and the value associated with "Netflix" will be dropped.
     * **Best Practice:** Add new items to the end of the lists in `CONFIG`.
+
+## 📖 User Guide: How to use the Kakeibo System
+
+### Step 1: Monthly Planning (Top Section)
+At the start of every month, fill out the top grey section:
+1.  **Income:** Enter your expected earnings for the month.
+2.  **Fixed Expenses:** Enter your bills (Rent, Utilities, etc.).
+3.  **Savings Goal:** Enter your target savings in cell **I5**.
+    * *Tip:* The sheet calculates a reference "20% Goal" in cell I6 to help you aim high.
+4.  **Available Budget:** The big dark box calculates exactly how much "Variable Money" you have left to spend for the month.
+
+### Step 2: Daily Logging
+Scroll down to the current date (visually grouped by day blocks).
+
+![Daily Log View](assets/kakeibo-2.png)
+
+* **Log Expenses:** Enter the Item, select a Category, and enter the Amount.
+* **Reflection:** Use the last column to write a brief note (e.g., "Impulse buy" or "Necessary").
+* **Expansion:** If you run out of rows for a specific day, simply right-click a row and select "Insert Row Below". **Important:** Copy the date into the new row so the formulas include it in the weekly totals.
+
+### Step 3: Weekly & Yearly Review
+* **Weekly Heatmap (Right Side):** The table on the right of every month automatically sums up your spending by category and week.
+
+![Daily Log View](assets/kakeibo-3.png)
+
+* **The Dashboard:** Click the `DASHBOARD` tab for a high-level view.
+
+![Kakeibo Dashboard Screenshot](assets/kakeibo-1.png)
+
+* **Status Bar:** Shows a progress bar of your budget.
+    * 🟢 **Green:** You are within budget.
+    * 🔴 **Red:** You have overspent.
+* **Macro Analysis:** Check the Pie Charts to see the balance between your **Needs**, **Optional**, **Culture**, and **Extra** spending.
 
 ## ☕ Support the Project
 
