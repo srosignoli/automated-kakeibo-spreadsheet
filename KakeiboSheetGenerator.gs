@@ -209,8 +209,7 @@ function setupTopSection(sheet) {
   sheet.getRange("H5").setValue("Goal (Input)"); sheet.getRange("I5").setNumberFormat("€#,##0.00");
   sheet.getRange("H6").setValue("Ref (20%)").setFontStyle("italic").setHorizontalAlignment("right");
   sheet.getRange("I6").setFormula(`=C${LAYOUT.incomeTotalRow}*20%`).setNumberFormat("€#,##0.00").setFontColor("grey"); 
-  
-  // REMOVED: sheet.getRange("F15").setFormula("=I5")... (No longer needed)
+  sheet.getRange("F15").setFormula("=I5").setFontColor("white"); 
 
   var mathFormula = `=C${LAYOUT.incomeTotalRow}-F${LAYOUT.fixedTotalRow}-I5`;
   var customFormat = '"AVAILABLE: "€#,##0.00'; 
@@ -239,7 +238,9 @@ function addWeeklyAnalysisMatrix(sheet) {
        var dateRange = `$B$${logDataStart}:$B`; var catRange = `$F$${logDataStart}:$F`; var amtRange = `$G$${logDataStart}:$G`;
        var formula = `=SUMPRODUCT((${catRange}="${cat}") * (IFERROR(DAY(${dateRange});0)>=${min}) * (IFERROR(DAY(${dateRange});0)<=${max}) * ${amtRange})`;
        if(w===5) formula = `=SUMPRODUCT((${catRange}="${cat}") * (IFERROR(DAY(${dateRange});0)>28) * ${amtRange})`;
-       sheet.getRange(currentRow, colStart+w).setFormula(formula).setNumberFormat("€0"); 
+       
+       // CHANGE 1: Use Decimal Format
+       sheet.getRange(currentRow, colStart+w).setFormula(formula).setNumberFormat("€#,##0.00"); 
     }
   });
   var totalRow = startRow + 2 + CONFIG.categories.length;
@@ -247,7 +248,8 @@ function addWeeklyAnalysisMatrix(sheet) {
   for(var w=1; w<=5; w++) { 
     var colLetter = String.fromCharCode(78+w); 
     var sumStart = startRow + 2; var sumEnd = totalRow - 1;
-    sheet.getRange(totalRow, colStart+w).setFormula(`=SUM(${colLetter}${sumStart}:${colLetter}${sumEnd})`).setNumberFormat("€0"); 
+    // CHANGE 2: Use Decimal Format for Totals
+    sheet.getRange(totalRow, colStart+w).setFormula(`=SUM(${colLetter}${sumStart}:${colLetter}${sumEnd})`).setNumberFormat("€#,##0.00"); 
   }
 }
 
@@ -264,10 +266,7 @@ function createDashboard(ss) {
   CONFIG.months.forEach(m => {
     sheet.getRange(row, 2).setValue(m);
     sheet.getRange(row, 3).setFormula(`='${m}'!C${LAYOUT.incomeTotalRow}`);
-    
-    // FIX IS HERE: Point to I5 (Input Goal), not F15
     sheet.getRange(row, 4).setFormula(`='${m}'!I5`);
-    
     sheet.getRange(row, 5).setFormula(`='${m}'!F${LAYOUT.fixedTotalRow}`);
     sheet.getRange(row, 6).setFormula(`='${m}'!F${LAYOUT.statusRow}`); 
     sheet.getRange(row, 7).setFormula(`='${m}'!H${LAYOUT.statusRow}`);
@@ -281,7 +280,8 @@ function createDashboard(ss) {
     row++;
   });
   
-  sheet.getRange("C5:G17").setNumberFormat("€#,##0"); 
+  // CHANGE 3: Decimal Format for Dashboard Table
+  sheet.getRange("C5:G17").setNumberFormat("€#,##0.00"); 
   createCharts(sheet);
   
   var statusRange = sheet.getRange("H5:H16");
@@ -291,7 +291,6 @@ function createDashboard(ss) {
 }
 
 function createCharts(sheet) {
-  // Detailed Category Table
   sheet.getRange("J5").setValue("Category").setFontWeight("bold"); 
   sheet.getRange("K5").setValue("Total").setFontWeight("bold");
   var chartDataStartRow = 6;
@@ -304,10 +303,10 @@ function createCharts(sheet) {
        var rowInMonthly = (LAYOUT.logStartRow - 1) + 2 + i;
        ranges.push(`SUM('${m}'!O${rowInMonthly}:S${rowInMonthly})`); 
     });
-    sheet.getRange(chartDataStartRow+i, 11).setFormula(`=${ranges.join("+")}`).setNumberFormat("€#,##0");
+    // CHANGE 4: Decimal Format for Detailed Table
+    sheet.getRange(chartDataStartRow+i, 11).setFormula(`=${ranges.join("+")}`).setNumberFormat("€#,##0.00");
   });
 
-  // Macro Category Table
   var macroCol = 13; 
   sheet.getRange(5, macroCol).setValue("Macro Category").setFontWeight("bold");
   sheet.getRange(5, macroCol+1).setValue("Total").setFontWeight("bold");
@@ -320,7 +319,8 @@ function createCharts(sheet) {
     var catRange = `J$${chartDataStartRow}:J$${rangeEnd}`;
     var sumRange = `K$${chartDataStartRow}:K$${rangeEnd}`;
     var formula = `=SUMIF(${catRange}; "${macro}*"; ${sumRange})`;
-    sheet.getRange(macroRows+i, macroCol+1).setFormula(formula).setNumberFormat("€#,##0");
+    // CHANGE 5: Decimal Format for Macro Table
+    sheet.getRange(macroRows+i, macroCol+1).setFormula(formula).setNumberFormat("€#,##0.00");
   });
   
   var charts = sheet.getCharts();
