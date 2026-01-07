@@ -29,6 +29,22 @@ This system handles date generation, layout formatting, visual grouping, and aut
 7.  Reload your Google Sheet browser tab.
 8.  You will see a new menu item called **"Kakeibo Settings"** appear in the toolbar.
 
+## 🔐 Authorization Guide (Important!)
+
+When you run the script for the very first time (e.g., when clicking "Factory Reset"), Google will ask for permission. Because this script is open source and not published on the official Google Web Store, you will see a warning screen.
+
+**This is normal.** Here is how to proceed safely:
+
+1.  A window will pop up. Click **Review Permissions**.
+2.  Select your Google Account.
+3.  You will see a scary screen saying **"Google hasn't verified this app"**.
+    * *Why?* Because this is a custom script you just pasted, not a product from a big company.
+4.  Click **Advanced** (bottom left).
+5.  Click **Go to KakeiboSystem (unsafe)** (bottom link).
+6.  Click **Allow** to let the script edit your spreadsheet.
+
+**Note on Privacy:** This script runs 100% inside your Google account. No data is ever sent to the developer or any third party. You can verify this by looking at the code yourself!
+
 ## ⚙️ Configuration
 
 At the very top of the script, you will find the `CONFIG` object. Edit these lists to customize the sheet for your life.
